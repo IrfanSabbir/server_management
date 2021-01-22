@@ -81,6 +81,7 @@ const columns = [
     {id:"server_data", label:"Server", minWidth:150},
    { id: 'location', label: 'Location', minWidth: 100 },
    { id: 'expire_date', label: 'Expire Date', minWidth: 100 },
+   { id: 'billing_type', label: 'Billing Type', minWidth: 40 },
    {
     id: 'status',
     label: 'Status',
@@ -332,6 +333,8 @@ const ServerTable = (props)=>{
     
 
     const  createData= (server) =>{
+
+       const billing_type = <span style={{color:"grey", fontSize:"18px"}}>{server.billing_type }</span>
         const server_data =<div>
              <span className="Table_Title">
                 <NavLink to={`/dashboard/server_details/${server.server_id}`} style={{textDecoration:"none", color:"grey"}}>
@@ -380,14 +383,12 @@ const ServerTable = (props)=>{
         </div>
         
         const status = <div>
-                
-                
                 {spinner && serverId === server.server_id  ? <CircularProgress  style={{color:"#007bfc"}} /> :
                   <div> <span style={{color:"grey", fontSize:"18px"}}>{server.power_status }</span>&nbsp;&nbsp;
                        <IconButton onClick={()=>checkServerStatus(server.server_id,server.route, server.key)}><SlowMotionVideoIcon style={{color:"#007bfc"}}  /> </IconButton> </div>}&nbsp;&nbsp;
             </div>
             
-        return {server_data, location, expire_date ,status, action};
+        return {server_data, location, expire_date ,billing_type,status, action};
     }
 
     const closeMessagHandler = ()=>{

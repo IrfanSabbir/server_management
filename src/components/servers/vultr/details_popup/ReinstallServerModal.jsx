@@ -24,8 +24,7 @@ const ReinstallServer = (props)=>{
             const result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server/re_install",
                                         inputData, {headers:headers} )
             
-            
-             console.log(result.data.server)
+           
             setSpinner(false)
             props.modalHandler(result.data.message, false, result.data.server)
              

@@ -24,7 +24,7 @@ const LabelUpdate = (props)=>{
                 route:props.route,
                 label
             }
-            const result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server/update_vultr_label",
+            const result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server/update_label",
                                         inputData, {headers:headers} )
             
             console.log(result.data)

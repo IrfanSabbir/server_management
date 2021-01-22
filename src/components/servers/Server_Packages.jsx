@@ -8,6 +8,7 @@ const Server_Packages = (props)=>{
     let packageBody = "Loading"
     if(props.packages){
         packageBody = props.packages.map((pack, index)=>{
+              if(pack.route !== "vultr") return
                 return(<Grid item xs={12} sm={12} md={6} lg={4} key={index}>
                     <div className={(props.package_id===pack._id ? "Selection Locations_div" :"Locations_div")} 
                          onClick={()=>props.setPackageId(pack._id)}>

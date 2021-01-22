@@ -15,8 +15,7 @@ const RestartServer = (props)=>{
                 "Content-Type":"application/json",
                 "Authorization":"Bearer "+props.token
             }
-            console.log(props.route)
-            console.log(props.server_id)
+           
 
             const inputData ={
                 server_id:props.server_id,

@@ -115,10 +115,10 @@ const Vultr_Server = (props)=>{
                 "Content-Type":"application/json",
                 "Authorization":"Bearer "+props.token
             }
-            let result = {}
-            //  result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server", inputData, {headers:headers})
+            
+            let result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server", inputData, {headers:headers})
             setSprinner(false)
-            setMessage( <p style={{color:"green", fontSize:"20px",fontWeight:"bolder"}}>Your server is currently  {result.data.server.status}</p>)
+            setMessage( <p style={{color:"green", fontSize:"20px",fontWeight:"bolder"}}>{result.data.message}</p>)
           
             setDCID("")
             setSNAPSHOTID("")
@@ -132,6 +132,7 @@ const Vultr_Server = (props)=>{
 
 
         } catch (error) {
+           console.log(error)
             setSprinner(false)
             setModal(true)
             setMessage( <p style={{color:"red", fontSize:"25px", fontWeight:"bolder"}}> We are unable to create server. <br/>Please try again!</p>)

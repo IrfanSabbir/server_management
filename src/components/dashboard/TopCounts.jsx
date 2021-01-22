@@ -19,6 +19,18 @@ const countReport = (props)=>{
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <div className="Count_Report" style={{backgroundColor:"#3802A8"}}>
+                        <p style={{color:"white", fontSize:"35px", fontWeight:"bold"}}>{props.counts.vpnCount}</p>
+                        <p className="Count_title">Vpn Server</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <div className="Count_Report" style={{backgroundColor:"#3802A8"}}>
+                        <p style={{color:"white", fontSize:"35px", fontWeight:"bold"}}>{props.counts.cloudCount}</p>
+                        <p className="Count_title">Cloud server</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
                     <div className="Count_Report" style={{backgroundColor:"#7702A8"}}>
                         <p style={{color:"white", fontSize:"35px", fontWeight:"bold"}}>{props.counts.server_count}</p>
                         <p className="Count_title">Total Server</p>
@@ -38,7 +50,7 @@ const countReport = (props)=>{
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
                     <div className="Count_Report" style={{backgroundColor:"#02A850"}}>
-                        <p style={{color:"white", fontSize:"35px", fontWeight:"bold"}}>{props.counts.totla_billing}$</p>
+                        <p style={{color:"white", fontSize:"35px", fontWeight:"bold"}}>{props.counts.total_billing}$</p>
                         <p className="Count_title">Total Billings</p>
                     </div>
                 </Grid>

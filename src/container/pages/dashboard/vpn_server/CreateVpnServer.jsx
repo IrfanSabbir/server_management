@@ -9,7 +9,7 @@ const Createserver = (props)=>{
     const [route, setRoute] = useState("")
     const [packages, setPackages ] = useState([])
     const [snapshots, setSnapshots ] = useState([])
-    const [locations, setLocations ] = useState([])
+    const [vultrLocations, setVultLocations ] = useState([])
 
     useEffect(()=>{
         const getPreeData= async () =>{
@@ -19,7 +19,7 @@ const Createserver = (props)=>{
                     "Authorization":"Bearer "+props.token
                 }
                 const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_vultr", {headers:headers})
-                setLocations(result.data.locations)
+                setVultLocations(result.data.vultr_locations)
                 setPackages(result.data.packages)
                 setSnapshots(result.data.snapshots)
             } catch (error) {
@@ -28,7 +28,7 @@ const Createserver = (props)=>{
         }
         getPreeData()
         return () => {
-            setLocations([])
+            setVultLocations([])
             setPackages([])
             setSnapshots([]) // This worked for me
           };
@@ -61,7 +61,7 @@ const Createserver = (props)=>{
             {route  === "vultr" && 
              <VultServer
              packages={packages}
-             locations={locations}
+             locations={vultrLocations}
              snapshots={snapshots}
              route ={route}
              returnHandler={returnHandler}

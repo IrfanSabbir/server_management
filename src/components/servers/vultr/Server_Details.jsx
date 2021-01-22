@@ -77,7 +77,7 @@ const VultrServerDetails = (props)=>{
                 'Content-Type':"application/json",
                 "Authorization":"Bearer "+props.token
             }
-            const result = await axios.get(process.env.REACT_APP_BASE_URL+'customer_api/server/vultr/'+server_id, {headers:headers})
+            const result = await axios.get(process.env.REACT_APP_BASE_URL+'customer_api/server/details/'+server_id, {headers:headers})
             setServer(result.data.server)
             console.log(result.data.server)
             setSpinner(false)
@@ -185,7 +185,7 @@ const VultrServerDetails = (props)=>{
                          <p  className="Details_Sub_Title">CPU :<span style={{marginRight:"4.3vw"}}/>{server.cpu}</p>
                          <p  className="Details_Sub_Title">RAM :<span style={{marginRight:"4.3vw"}}/>{server.ram}</p>
                          <p  className="Details_Sub_Title">Storage :<span style={{marginRight:"2.6vw"}}/>{server.disk}</p>
-                         <p  className="Details_Sub_Title">Bandwidth :<span style={{marginRight:"1vw"}}/>{server.bandwidth }</p>
+                         <p  className="Details_Sub_Title">Bandwidth :<span style={{marginRight:"1vw"}}/>{server.current_bandwidth_gb +" of "+ server.allowed_bandwidth_gb }</p>
 
                      </div>
                  </Grid>
@@ -218,7 +218,7 @@ const VultrServerDetails = (props)=>{
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={8} md={8} lg={8}>
                      
-                            <p className="Details_Title">{server.server_name}
+                            <p className="Details_Title">{server.label}
                             <IconButton variant="contained" color="primary" onClick={()=>{ setLabelUpdateM(true)}}><EditIcon/></IconButton>&nbsp;&nbsp;<br/>
                             </p>  
                             <p  className="Details_Sub_Title">{server.server_ip}&nbsp;&nbsp;&nbsp;{server.location}&nbsp;&nbsp;&nbsp;{server.expire_date}</p>

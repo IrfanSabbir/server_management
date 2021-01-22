@@ -9,7 +9,7 @@ const SnapShot_Component = (props)=>{
     if(props.snpashots){
         snapshots = <Grid container spacing={3}>
         { props.snpashots.map((snaps, index)=>{
-            if(snaps.snapshot_type !== "vpn") return
+            if(snaps.route !== "vultr") return
          else{ 
          return(
              <Grid item xs={12} sm={6} md={6} lg={4}  key={index}>
