@@ -1,0 +1,40 @@
+.Details_Title{
+    font-size: 40px;
+    color:#007bfc;
+    font-weight: bolder;
+    text-align: left;
+}
+.Table_Title{
+    font-size: 28px;
+    color:#868686;
+    font-weight: bolder;
+    text-align: left;
+}
+.Details_Sub_Title{
+    font-size: 20px;
+    color: rgb(92, 92, 97);
+    font-weight: bolder;
+    text-align: left;
+}
+
+.Details_Icon_Button{
+    color: #090765;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.Details_page_box{
+    width: 100%;
+    min-height: 150px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 3px;
+    text-align: left;
+    padding:20px;
+}
+
+.Details_page_box_Title{
+    font-size: 32px;
+    color:#007bfc;
+    font-weight: bolder;
+    text-align: left;
+}

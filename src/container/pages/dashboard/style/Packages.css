@@ -1,0 +1,69 @@
+.Packages{
+    /* padding:20px; */
+    /* text-align:"left"; */
+    width: 100%;
+    box-shadow: 10px 8px 6px -6px  rgba(43, 43, 43, 0.7);
+    background-color:rgba(235, 235, 237,1);
+    border-radius:10px
+}
+
+.Package_title{
+        width:100%;
+        background-color:#007bfc ;
+        border-radius:4px;
+         text-align:center; 
+        padding:20px;
+        min-height: 130px;
+}
+.Package_list{
+    font-size: 18px;
+    text-align: center;
+    font-weight: bolder;
+    letter-spacing: 1.5;
+    color: rgb(27, 27, 29);
+}
+
+.Package_list_pricing_monthly{
+    font-size: 30px;
+    font-weight: bolder;
+    color: #007bfc;
+    text-align: center;
+}
+
+.Package_list_pricing_other{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #949494;
+    text-align: center;
+}
+
+.Divider{
+    margin-left: 25%;
+    width: 50%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #007bfc;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Packages:hover {
+    background-color:rgb(23, 23, 27);
+}
+
+.Packages:hover .Package_list {
+    background-color:rgb(23, 23, 27);
+    color: rgb(233, 231, 231);
+}
+
+
+.Intro_Content{
+    text-align:left;
+    color:#007bfc;
+    font-weight:bolder;
+    width:100%;
+    background:linear-gradient(90deg, rgba(224,224,224,100) 0%, rgba(255,255,255,0) 70%); 
+    padding:20px;
+    border-radius:10px;
+    font-size: 30px;
+}

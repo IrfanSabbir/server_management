@@ -1,0 +1,23 @@
+.Navigation a{
+    font-size: 17px;
+    color: rgb(49, 49, 49);
+    padding-bottom: 20px;
+    text-decoration: none;
+    font-weight: bold;
+
+    /* font-weight: bolder; */
+
+}
+.Navigation a:hover,
+.Navigation a:active,
+.Navigation a.active 
+{
+    color:#007bff;
+    font-weight: bold;
+    
+}
+
+.listTextSize{
+    font-size: 18px;
+
+}

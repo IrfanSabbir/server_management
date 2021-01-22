@@ -1,0 +1,63 @@
+.Locations_div{
+    /* width: 100%; */
+    height: auto;
+    border-radius: 4px;
+    border: 2px solid rgb(235, 233, 233);
+    cursor: pointer;
+    text-align: left;
+    padding: 10px 15px;
+}
+.Selection{
+    border-bottom:10px solid #007bff;
+    box-shadow: 2px 4px 5px 3px  rgba(43, 43, 43, 0.7);
+    border-radius:7px;
+
+}
+
+.Snaptshot_name{
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+    color: #555454;
+}
+.Snaptshot_data{
+    font-size: 18px;
+    color:#929292;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.Close_Message{
+    text-align: right;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -35px;
+}
+
+.Success_message{
+    width:100%;
+    color:white;
+    font-size:20px;
+    padding:20px; 
+    background-color:#007bfc;
+    text-align: left;
+}
+
+.Error_message{
+    width:100%;
+    color:white;
+    font-size:20px;
+    padding:20px; 
+    background-color:red;
+    text-align: left;
+
+}
+
+.Message{
+    text-align: left;
+}
+
+
+

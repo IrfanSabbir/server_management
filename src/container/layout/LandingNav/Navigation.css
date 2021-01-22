@@ -1,0 +1,30 @@
+
+
+.Toolbar{
+    width: 100%;
+    background: rgb(6,2,74);
+    background: linear-gradient(90deg, rgba(6,2,74,1) 0%, rgba(13,13,142,1) 100%);
+}
+.Container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-decoration: none;
+
+
+}
+
+.LogoLink {
+    font-size: 25px;
+    color:white;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.RightLink{
+    font-size: 20px;
+    text-decoration: none;
+    color:white;
+    padding: 0 10px;
+    font-weight: bold;
+}
+

@@ -1,0 +1,17 @@
+.Count_Report{
+    /* height: 150px; */
+    padding: 20px;
+    color: white;
+    border-radius: 6px;
+}
+
+.Count_title{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+.Count_Report:hover{
+    -webkit-box-shadow: 10px 10px 6px -6px #777;
+    -moz-box-shadow: 10px 10px 6px -6px #777;
+         box-shadow: 10px 10px 6px -6px #777;
+}

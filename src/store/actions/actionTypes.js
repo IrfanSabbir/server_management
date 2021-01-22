@@ -1,0 +1,8 @@
+export const AUTH_SUCCESS = "AUTH_SUCCESS"
+export const LOG_OUT = "LOG_OUT"
+export const ALL_SERVER_DATA = "ALL_SERVER_DATA"
+export const UPDATE_SERVER_DATA = "UPDATE_SERVER_DATA"
+export const DELETE_SERVER_DATA = "DELETE_SERVER_DATA"
+
+
+
