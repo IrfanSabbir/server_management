@@ -77,7 +77,7 @@ const VultrServerDetails = (props)=>{
                 'Content-Type':"application/json",
                 "Authorization":"Bearer "+props.token
             }
-            const result = await axios.get(process.env.REACT_APP_BASE_URL+'customer_api/server/vultr/'+server_id, {headers:headers})
+            const result = await axios.get(process.env.REACT_APP_BASE_URL+'customer_api/server/details/'+server_id, {headers:headers})
             setServer(result.data.server)
             console.log(result.data.server)
             setSpinner(false)
@@ -86,6 +86,9 @@ const VultrServerDetails = (props)=>{
         }
     }
     const closeModalHandler = (message, error, server)=>{
+        if(server){
+            setServer(server)
+        }
        
         setMessage( message)
         setErrors( error)
@@ -93,16 +96,13 @@ const VultrServerDetails = (props)=>{
         setStopServerM(false)
         setDestroyServerM(false)
         setLabelUpdateM(false)
-        if(server){
-            setServer(server)
-        }
     }
 
-    const destroyServerModal = (message, error)=>{
+    const destroyServerModal = (message, error,updatServer)=>{
         setMessage( message)
         setErrors( error)
         setDestroyServerM(false)
-        if(!error){
+        if(updatServer){
             setServer({})
         }
 
@@ -141,7 +141,7 @@ const VultrServerDetails = (props)=>{
         jsx_body = <div>
             <Grid container spacing={5}>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
-                    <div className="Details_page_box">
+                    <div className="Details_page_box"> 
                       <p  className="Details_Sub_Title">Bandwidth Usage</p>
                       <p> <span className="Details_Title">{server.current_bandwidth_gb} </span>
                            <span  className="Details_Sub_Title"> / {" "+server.allowed_bandwidth_gb}GB</span>
@@ -185,7 +185,7 @@ const VultrServerDetails = (props)=>{
                          <p  className="Details_Sub_Title">CPU :<span style={{marginRight:"4.3vw"}}/>{server.cpu}</p>
                          <p  className="Details_Sub_Title">RAM :<span style={{marginRight:"4.3vw"}}/>{server.ram}</p>
                          <p  className="Details_Sub_Title">Storage :<span style={{marginRight:"2.6vw"}}/>{server.disk}</p>
-                         <p  className="Details_Sub_Title">Bandwidth :<span style={{marginRight:"1vw"}}/>{server.bandwidth }</p>
+                         <p  className="Details_Sub_Title">Bandwidth :<span style={{marginRight:"1vw"}}/>{server.current_bandwidth_gb +" of " +server.allowed_bandwidth_gb}</p>
 
                      </div>
                  </Grid>
@@ -218,10 +218,16 @@ const VultrServerDetails = (props)=>{
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={8} md={8} lg={8}>
                      
-                            <p className="Details_Title">{server.server_name}
+                            <p className="Details_Title">{server.label}
                             <IconButton variant="contained" color="primary" onClick={()=>{ setLabelUpdateM(true)}}><EditIcon/></IconButton>&nbsp;&nbsp;<br/>
                             </p>  
-                            <p  className="Details_Sub_Title">{server.server_ip}&nbsp;&nbsp;&nbsp;{server.location}&nbsp;&nbsp;&nbsp;{server.expire_date}</p>
+                            <p  className="Details_Sub_Title">{server.server_ip}
+                            <CopyToClipboard text={server.server_ip}
+                            onCopy={setCopy}>
+                            <IconButton><FileCopyIcon style={{color:"#FF8989"}}/></IconButton>
+                            </CopyToClipboard>
+                            &nbsp;{server.location}&nbsp;&nbsp;&nbsp;{server.expire_date}</p>
+                            
                       
 
                 </Grid>

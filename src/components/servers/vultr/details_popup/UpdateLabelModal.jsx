@@ -24,10 +24,10 @@ const LabelUpdate = (props)=>{
                 route:props.route,
                 label
             }
-            const result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server/update_vultr_label",
+            const result = await axios.post(process.env.REACT_APP_BASE_URL+"customer_api/server/update_label",
                                         inputData, {headers:headers} )
             
-            console.log(result.data)
+            console.log(result.data.server)
             setSpinner(false)
             props.modalHandler(result.data.message, false, result.data.server)
              
@@ -42,7 +42,7 @@ const LabelUpdate = (props)=>{
         <div style={{width:"100%"}}>
         <br/>
     
-    <Modal isOpen={props.modal} toggle={()=>props.modalHandler("", false)} className={className} style={{top:"80px", left:"100px"}}>
+    <Modal isOpen={props.modal} toggle={()=>props.modalHandler("", false,{})} className={className} style={{top:"80px", left:"100px"}}>
         <ModalHeader  style={{backgroundColor:"#007bfc", fontSize:"20px", color:"white"}}>Update label</ModalHeader>
         <ModalBody >
 

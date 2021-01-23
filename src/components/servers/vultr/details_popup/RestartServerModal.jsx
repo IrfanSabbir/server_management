@@ -55,7 +55,7 @@ const RestartServer = (props)=>{
             </div><br/>
         </ModalBody>
         <ModalFooter>
-        <Button color="primary" onClick={()=>props.modalHandler("", false)}>Cancle</Button>
+        <Button color="primary" onClick={()=>props.modalHandler("", false)}>Cancel</Button>
         </ModalFooter>
     </Modal>
     </div>

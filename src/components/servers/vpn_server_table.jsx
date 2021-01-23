@@ -45,6 +45,7 @@ import RestartServerModal from './vultr/details_popup/RestartServerModal'
 import ReinstallServerModal from './vultr/details_popup/ReinstallServerModal'
 import DestroyServerModal from './vultr/details_popup/DestroyServerModal'
 import LableUpdateMOdal from './vultr/details_popup/UpdateLabelModal'
+import RenewServerModal from './vultr/details_popup/RenewServerModal'
 
 import VpnFilter from './vultr/vpn_filter'
 import ServerRouteFilter from './vultr/server_filter'
@@ -81,6 +82,7 @@ const columns = [
     {id:"server_data", label:"Server", minWidth:150},
    { id: 'location', label: 'Location', minWidth: 100 },
    { id: 'expire_date', label: 'Expire Date', minWidth: 100 },
+   { id: 'billing_type', label: 'Billing Type', minWidth: 100 },
    {
     id: 'status',
     label: 'Status',
@@ -134,9 +136,11 @@ const ServerTable = (props)=>{
     const [destroyServerM, setDestroyServerM]= useState(false)
     const [reinstallServerM, setReinstallServerM]= useState(false)
     const [labelUpdateM , setLabelUpdateM] = useState(false)
+    const [renewServerM , setreNewServerM] = useState(false)
+
     const [vpn_type, setVpnType] = useState("All");
     const [routeProvider, setRouteProvider] = useState("")
-     const [label, setLabel] = useState("")
+    const [label, setLabel] = useState("")
     const [copy, setCopy]= useState("")
     const [loader, setLoader] = useState(false)
 
@@ -185,6 +189,7 @@ const ServerTable = (props)=>{
     }
     
     const serverRouteHandler = (server, index)=>{
+        setServerData(server)
         setServerId(server.server_id)
         setRoute(server.route)
         setServerIndex(index)
@@ -206,6 +211,7 @@ const ServerTable = (props)=>{
         setStopServerM(false)
         setDestroyServerM(false)
         setLabelUpdateM(false)
+        setreNewServerM(false)
         setServerIndex()
 
     }
@@ -316,8 +322,8 @@ const ServerTable = (props)=>{
     }
 
     const expireDateModalHandler = (server, index)=>{
-        setServerData(server)
-        setServerIndex(index)
+        // setServerData(server)
+        // setServerIndex(index)
         setExpireDateModal(!expireDateModal)
     }
 
@@ -346,14 +352,15 @@ const ServerTable = (props)=>{
             </CopyToClipboard><br/>{copy&& serverId === server.server_id ?<span style={{color:"blue"}}> {copy}  (copied)</span>:null }
         </div>
         
-        const location =<p style={{color:"grey", fontSize:"20px"}}><img src={flag[server.country]} width="40px" height="auto" alt={server.country}/> &nbsp;{server.location }</p>
+        const location =<p style={{color:"grey", fontSize:"18px"}}><img src={flag[server.country]} width="40px" height="auto" alt={server.country}/> &nbsp;{server.location }</p>
+        const billing_type =<p style={{color:"grey", fontSize:"18px"}}>{server.billing_type }</p>
         
         const expire_date =<div>
-              <span style={{color:"grey", fontSize:"18px"}}>{server.expire_date }</span>&nbsp;&nbsp;
+              <span style={{color:"grey", fontSize:"17px"}}>{server.expire_date ? server.expire_date: " No expire date" }</span>&nbsp;&nbsp;
               {/* <IconButton variant="contained" color="primary" onClick={()=>expireDateModalHandler(server, server.key)}><EditIcon/></IconButton>&nbsp;&nbsp; */}
             </div> 
        
-            const action = <div>
+        const action = <div>
             <IconButton aria-controls="simple-menu" aria-haspopup="true"  onClick={(e)=>{serverRouteHandler(server,server.key);handleClick(e)}}><MoreHorizIcon style={{color:"grey"}}/></IconButton>
             <Menu
                 id="simple-menu"
@@ -369,6 +376,9 @@ const ServerTable = (props)=>{
                     </NavLink> 
                 </MenuItem><br/>
                 <Divider/><br/>
+              {/* <IconButton variant="contained" color="primary" onClick={()=>expireDateModalHandler(server, server.key)}><EditIcon/></IconButton>&nbsp;&nbsp; */}
+
+                <MenuItem onClick={handleClose} style={{color:"grey"}}><span  onClick={()=>setreNewServerM(true)} >< EditIcon /> &nbsp; Renew Server</span></MenuItem>
                 <MenuItem onClick={handleClose} style={{color:"grey"}}><span  onClick={()=>setStopServerM(true)} ><PowerSettingsNewIcon/> &nbsp; Server Stop</span></MenuItem>
                 <MenuItem onClick={handleClose} style={{color:"grey"}}><span onClick={()=>setRestartServerM(true)} ><AutorenewIcon/> &nbsp; Server Restart</span></MenuItem>
                 <MenuItem  onClick={handleClose} style={{color:"grey"}}><span onClick={()=>setReinstallServerM(true)}><DiscFullIcon/> &nbsp; Server Re-install</span></MenuItem>
@@ -387,7 +397,7 @@ const ServerTable = (props)=>{
                        <IconButton onClick={()=>checkServerStatus(server.server_id,server.route, server.key)}><SlowMotionVideoIcon style={{color:"#007bfc"}}  /> </IconButton> </div>}&nbsp;&nbsp;
             </div>
             
-        return {server_data, location, expire_date ,status, action};
+        return {server_data, location, expire_date , billing_type,status, action};
     }
 
     const closeMessagHandler = ()=>{
@@ -434,7 +444,7 @@ const ServerTable = (props)=>{
             <Typography variant="h4" 
             style={{textAlign:"left",color:"#007bfc", fontWeight:"bolder",  width:"100%", background:"linear-gradient(90deg, rgba(224,224,224,100) 0%, rgba(255,255,255,0) 70%)", padding:"20px", borderRadius:"10px"}}>Server table </Typography><br/>
                 
-                <Grid container spacing={2} >
+            <Grid container spacing={2} >
                <Grid item sx= {3} sm={2} md={1} lg={1} style={{borderBottom: showtext[0] && "2px solid #007bff", width: showtext[0] && "100%" }}>
                   <p className="Profile_Tab"  onClick={()=>{changeRead(0);getServers("vultr")}} >Vultr</p>
                </Grid>&nbsp;&nbsp;
@@ -469,7 +479,7 @@ const ServerTable = (props)=>{
             </div>
             <br/>
 
-            <Paper className={classes.root}>
+        <Paper className={classes.root}>
              <TableContainer className={classes.container}>
         
                 <Table stickyHeader aria-label="sticky table" >
@@ -514,7 +524,7 @@ const ServerTable = (props)=>{
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-        </Paper>
+    </Paper>
       
 
                 {deleteModal &&    <DeleteModal 
@@ -574,6 +584,16 @@ const ServerTable = (props)=>{
                     route = {route}
                     token ={props.token}
             />} 
+            { renewServerM && <RenewServerModal
+                    modal = {renewServerM}
+                    server ={serverData}
+                    modalHandler = {closeModalHandler}
+                    server_id = {serverId}
+                    route = {route}
+                    token ={props.token}
+            />}
+
+            
         </div>
     )
 }

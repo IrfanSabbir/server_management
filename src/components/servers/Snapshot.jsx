@@ -12,7 +12,7 @@ const SnapShot_Component = (props)=>{
             if(snaps.snapshot_type !== "vpn") return
          else{ 
          return(
-             <Grid item xs={12} sm={6} md={6} lg={4}  key={index}>
+             <Grid item xs={12} sm={6} md={4} lg={3}  key={index}>
                  <div className={(props.SNAPSHOTID.toString()===snaps.snapshot_id.toString() ? "Selection Locations_div" :"Locations_div") }
                   onClick={()=>{props.setSNAPSHOTID(snaps.snapshot_id);props.setVpnType(snaps.vpn_type)}}>
                       <div className="Package_title">
@@ -32,7 +32,7 @@ const SnapShot_Component = (props)=>{
   
 
     return(
-        <div>
+        <Container fixed>
             <p className="Title_text_black">VPN Type</p> <br/>
 
           
@@ -42,7 +42,7 @@ const SnapShot_Component = (props)=>{
             <br/>
             <br/>
 
-        </div>
+        </Container>
     )
 }
 

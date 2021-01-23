@@ -1,7 +1,7 @@
 import React,{useState,useRef} from 'react'
 
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-import { TextField, Grid, Button} from '@material-ui/core'
+import { TextField, Grid, Button,Container, Divider} from '@material-ui/core'
 
 const Serverinputs = (props)=>{
    
@@ -13,11 +13,37 @@ const Serverinputs = (props)=>{
         fontSize:"30px"
     }
 
+    // let jsx_body  = return(
+    //      for(let i=0; i<props.totalFields ; i++){
+    //     <Grid container spacing={3}>
+    //     <Grid item xs={12} sm={6} md={6} lg={6}>
+    //         <TextField 
+    //             variant="outlined" required type="text"  
+    //             onChange={(event)=>{props.setLabel(i, event)}}
+    //             label="label"
+    //             InputProps={{ style:{ fontSize:25} }}
+    //             placeholder="enter label"
+    //             style={style}
+    //         />
+    //     </Grid>
+    //     <Grid item xs={12} sm={6} md={6} lg={6}>
+    //         <TextField 
+    //             variant="outlined" 
+    //             required type="text"  
+    //             onChange={(event)=>props.setHostname(i,event)}
+    //             placeholder="hostname"
+    //             value={props.fields[i].hostname || ""}
+    //             InputProps={{ style:{ fontSize:25} }}
+    //             style={style}
+    //         />
+    //     </Grid>
+    // </Grid>}
+    // )
     return(
-        <div>
+        <Container style={{marginBottom:"60px"}} fixed>
 
         <p className="Title_text_black">Server Hostname & Label</p> <br/>
-   
+          
           {props.fields.map((field, idx) => {
                     return (
                     <div key={`${field}-${idx}`}>
@@ -43,17 +69,19 @@ const Serverinputs = (props)=>{
                                     style={style}
                                 />
                             </Grid>
-                        </Grid>   
+                        </Grid> 
                         <br/>
+                        <hr style={{backgroundColor:"#007bff", width:"60%"}}/>
+
                         
                     </div>
                     );
                 })} 
-            <Button  onClick={() => props.handleAdd()}><AddCircleRoundedIcon fontSize="large" color="primary"/></Button>
+            {/* <Button  onClick={() => props.handleAdd()}><AddCircleRoundedIcon fontSize="large" color="primary"/></Button> */}
 
           <br/><br/><br/>
             
-        </div>    
+        </Container>    
     )
 }
 

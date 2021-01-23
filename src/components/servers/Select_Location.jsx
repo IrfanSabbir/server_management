@@ -46,7 +46,7 @@ const Locations = (props)=>{
         locations = <Grid container spacing={3}>
         { props.locations.map((location, index)=>{
          return(
-             <Grid item xs={6} sm={6} md={4} lg={3}  key={index}>
+             <Grid item xs={6} sm={4} md={3} lg={3}  key={index}>
                  <div className={(props.DCID.toString()===location.DCID.toString() ? "Selection Locations_div" :"Locations_div") }
                   onClick={()=>{props.setDCIDHandler(location.DCID); props.setCountry(location.country)}}>
                       <Grid container spacing={3}>
@@ -74,7 +74,7 @@ const Locations = (props)=>{
             if(location.continent !== continent) return
             else{
                 return(
-                    <Grid item xs={12} sm={8} md={4} lg={3}  key={index}>
+                    <Grid item xs={6} sm={4} md={3} lg={3}   key={index}>
                         <div className={(props.DCID.toString()===location.DCID.toString() ? "Selection Locations_div" :"Locations_div") }
                         onClick={()=>props.setDCIDHandler(location.DCID)}>
                            
@@ -99,7 +99,7 @@ const Locations = (props)=>{
     }
 
     return(
-        <div style={{minWidth:"300px"}}>
+        <Container style={{minWidth:"300px"}} fixed>
             <p className="Title_text_black">Server Locations</p> <br/>
       
             <Grid container spacing={2} >
@@ -122,7 +122,7 @@ const Locations = (props)=>{
             <Divider style={{marginTop:"8px"}}/>
             <br/>
             {locations}
-        </div>
+        </Container>
     )
 }
 

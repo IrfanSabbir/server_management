@@ -26,7 +26,8 @@ const DestroyServer= (props)=>{
             
             
             setSpinner(false)
-            props.modalHandler(result.data.message, false)
+            let updatServer = true
+            props.modalHandler(result.data.message, false , updatServer)
              
         } catch (error) {
             console.log(error)
@@ -55,7 +56,7 @@ const DestroyServer= (props)=>{
             </div><br/>
         </ModalBody>
         <ModalFooter>
-        <Button color="primary" onClick={()=>props.modalHandler("", false)}>Cancle</Button>
+        <Button color="primary" onClick={()=>props.modalHandler("", false)}>Cancel</Button>
         </ModalFooter>
     </Modal>
     </div>

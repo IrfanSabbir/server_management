@@ -10,7 +10,6 @@ const Createserver = (props)=>{
     const [packages, setPackages ] = useState([])
     const [snapshots, setSnapshots ] = useState([])
     const [locations, setLocations ] = useState([])
-
     useEffect(()=>{
         const getPreeData= async () =>{
             try {
@@ -19,7 +18,8 @@ const Createserver = (props)=>{
                     "Authorization":"Bearer "+props.token
                 }
                 const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_vultr", {headers:headers})
-                setLocations(result.data.locations)
+             
+                setLocations(result.data.vultr_locations)
                 setPackages(result.data.packages)
                 setSnapshots(result.data.snapshots)
             } catch (error) {
