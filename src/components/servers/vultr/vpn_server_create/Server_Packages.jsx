@@ -8,7 +8,7 @@ const Server_Packages = (props)=>{
     let packageBody = "Loading"
     if(props.packages){
         packageBody = props.packages.map((pack, index)=>{
-                return(<Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+                return(<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                     <div className={(props.package_id===pack._id ? "Selection Locations_div" :"Locations_div")} 
                          onClick={()=>{props.setPackageId(pack._id);props.handlePackage(pack)}}>
                         <div className="Package_title">
@@ -56,7 +56,7 @@ const Server_Packages = (props)=>{
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={5} lg={3}  >
-                    <div   className={(props.billing_type === "daily" ? "Selection Locations_div" :"Locations_div") }
+                    <div   className={(props.billing_type === "hourly" ? "Selection Locations_div" :"Locations_div") }
                     onClick={()=>props.setBillingType("hourly")}>
                         <span className="Title_text_black">Hourly Billing</span>
                     </div>

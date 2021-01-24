@@ -13,12 +13,14 @@ import Dashboard from './container/pages/dashboard/Dashboard'
 import Packages from './container/pages/dashboard/Packages'
 import Snapshots from './container/pages/dashboard/Snapshots'
 import VpnServers from './container/pages/dashboard/vpn_server/VpnServers'
-import CloudServer from "./container/pages/dashboard/vpn_server/CloudServer";
+import CloudServer from "./container/pages/dashboard/cloud_server/CloudServers";
 import CreateVpnServer from './container/pages/dashboard/vpn_server/CreateVpnServer'
+import CreateCloudServer from './container/pages/dashboard/cloud_server/CreateCloudServer'
 import Profile from './container/pages/dashboard/Profile'
 import Payments from './container/pages/dashboard/Payments'
-import CreateCloudServer from './container/pages/dashboard/vpn_server/CreateCloudServer' 
-import ServerDetails from './components/servers/vultr/Server_Details'
+import ServerDetails from './components/servers/Server_Details/Server_Details_Page'
+
+
 
 
 import {connect} from 'react-redux'

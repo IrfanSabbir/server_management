@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import {Container ,Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
-import ServerTable from "../../../../components/servers/vpn_server_table";
+import ServerTable from "../../../../components/servers/Vpn_server_table/Vpn_server_table"
 
 const useStyles = makeStyles({
     button:{

@@ -10,11 +10,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo';
 import EditIcon from '@material-ui/icons/Edit';
 
-import StopServerModal from './details_popup/StopServerModal'
-import RestartServerModal from './details_popup/RestartServerModal'
-import DestroyServerModal from './details_popup/DestroyServerModal'
-import ReinstallServerModal from './details_popup/ReinstallServerModal'
-import LableUpdateModal from './details_popup/UpdateLabelModal'
+import StopServerModal from '../details_popup/StopServerModal'
+import RestartServerModal from '../details_popup/RestartServerModal'
+import DestroyServerModal from '../details_popup/DestroyServerModal'
+import ReinstallServerModal from '../details_popup/ReinstallServerModal'
+import LableUpdateModal from '../details_popup/UpdateLabelModal'
+
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -31,8 +32,9 @@ import JP from '../../../container/assets/flag/JP.png'
 import KR from '../../../container/assets/flag/KR.png'
 import SG from '../../../container/assets/flag/SG.png'
 
-import DetailsSkeleton from "./DetailsPageSkeleton";
-import ServerTableSkeleton from './TableSkeleton'
+import DetailsSkeleton from "../Skeleton/DetailsPageSkeleton";
+
+
 const flag={
     US:US,
     CA:CA,

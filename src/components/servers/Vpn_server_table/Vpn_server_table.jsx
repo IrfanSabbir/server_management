@@ -24,9 +24,6 @@ import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import EditIcon from '@material-ui/icons/Edit';
 import {IconButton, Divider, Grid} from '@material-ui/core' 
 import RedoIcon from '@material-ui/icons/Redo';
-import DeleteModal from './Destroy'
-import ExpiredateUpdateModal from './Expiredate_Update'
-import ServerDetailsModal from "./Server_Details";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -37,32 +34,37 @@ import DiscFullIcon from '@material-ui/icons/DiscFull';
 import DeleteIcon from '@material-ui/icons/Delete'
 import SlowMotionVideoIcon from '@material-ui/icons/SlowMotionVideo';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
-import * as actions from '../../store/actions/index'
-
-import StopServerModal from './vultr/details_popup/StopServerModal'
-import RestartServerModal from './vultr/details_popup/RestartServerModal'
-import ReinstallServerModal from './vultr/details_popup/ReinstallServerModal'
-import DestroyServerModal from './vultr/details_popup/DestroyServerModal'
-import LableUpdateMOdal from './vultr/details_popup/UpdateLabelModal'
-import RenewServerModal from './vultr/details_popup/RenewServerModal'
-
-import VpnFilter from './vultr/vpn_filter'
-import ServerRouteFilter from './vultr/server_filter'
+import { Skeleton } from '@material-ui/lab'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import TableSkeleton from './vultr/TableSkeleton'
 
-import US from '../../container/assets/flag/US.png'
-import CA from '../../container/assets/flag/CA.png'
-import NL from '../../container/assets/flag/NL.png'
-import GB from '../../container/assets/flag/GB.png'
-import DE from '../../container/assets/flag/DE.png'
-import AU from '../../container/assets/flag/AU.png'
-import FR from '../../container/assets/flag/FR.png'
-import JP from '../../container/assets/flag/JP.png'
-import KR from '../../container/assets/flag/KR.png'
-import SG from '../../container/assets/flag/SG.png'
+import * as actions from '../../../store/actions/index'
 
+import StopServerModal from '../details_popup/StopServerModal'
+import RestartServerModal from '../details_popup/RestartServerModal'
+import ReinstallServerModal from '../details_popup/ReinstallServerModal'
+import DestroyServerModal from '../details_popup/DestroyServerModal'
+import LableUpdateMOdal from '../details_popup/UpdateLabelModal'
+import RenewServerModal from '../details_popup/RenewServerModal'
+
+
+import VpnFilter from './vpn_filter'
+
+import TableSkeleton from '../Skeleton/TableSkeleton'
+
+
+import US from '../../../container/assets/flag/US.png'
+import CA from '../../../container/assets/flag/CA.png'
+import NL from '../../../container/assets/flag/NL.png'
+import GB from '../../../container/assets/flag/GB.png'
+import DE from '../../../container/assets/flag/DE.png'
+import AU from '../../../container/assets/flag/AU.png'
+import FR from '../../../container/assets/flag/FR.png'
+import JP from '../../../container/assets/flag/JP.png'
+import KR from '../../../container/assets/flag/KR.png'
+import SG from '../../../container/assets/flag/SG.png'
+import './Table.css'
 
 
 const flag={
@@ -117,10 +119,7 @@ const ServerTable = (props)=>{
     const [anchorEl, setAnchorEl] = useState(null);
     // const [servers, setServers] = useState(props.servers)
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [deleteModal, setDeleteModal] = useState(false)
-    const [expireDateModal, setExpireDateModal] = useState(false)
-    const [deatilsModal, setDetailsModal] = useState(false)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
 
     const [serverData, setServerData] = useState()
     const [serverIndex, setServerIndex ] = useState()
@@ -311,21 +310,8 @@ const ServerTable = (props)=>{
 
         }
     }
-    const deleteModalHandler = (server, index)=>{
-        setServerData(server)
-        setDeleteModal(!deleteModal)
-        setServerIndex(index)
-    }
-    const detailsModalHandler = (server)=>{
-        setServerData(server)
-        setDetailsModal(!deatilsModal)
-    }
 
-    const expireDateModalHandler = (server, index)=>{
-        // setServerData(server)
-        // setServerIndex(index)
-        setExpireDateModal(!expireDateModal)
-    }
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -338,29 +324,26 @@ const ServerTable = (props)=>{
     
 
     const  createData= (server) =>{
-        const server_data =<div>
-             <span className="Table_Title">
-                <NavLink to={`/dashboard/server_details/${server.server_id}`} style={{textDecoration:"none", color:"grey"}}>
+        const server_data =<span>
+                <NavLink to={`/dashboard/server_details/${server.server_id}`} className="TABLE_SERVER_NAME">
                      {server.server_name}
-                 </NavLink> 
-                </span><br/>
+                 </NavLink><br/>
             {/* <IconButton variant="contained" color="primary" onClick={()=>{serverRouteHandler(server, server.key); setLabelUpdateM(true)}}><EditIcon/></IconButton>&nbsp;&nbsp;<br/> */}
-            <span style={{color:"grey"}}>{ server.ram+" "+server.os+" "+server.server_ip} </span>
+            <p style={{color:"grey", textAlign:"left", marginTop:"0px"}}>{ server.ram+" "+server.os+" "+server.server_ip}
             <CopyToClipboard text={server.server_ip}
                 onCopy={setCopy}>
-                <IconButton onClick={()=>setServerId(server.server_id)}><FileCopyIcon style={{color:"#FF8989"}}/></IconButton>
-            </CopyToClipboard><br/>{copy&& serverId === server.server_id ?<span style={{color:"blue"}}> {copy}  (copied)</span>:null }
-        </div>
+                <IconButton onClick={()=>setServerId(server.server_id)}><FileCopyIcon fontSize="small" style={{color:"#FF8989", textAlign:'right'}}/></IconButton>
+            </CopyToClipboard> {copy&& serverId === server.server_id ?<span style={{color:"blue"}}> <AssignmentTurnedInIcon fontSize="small"/> </span>:null }</p>
+        </span>
         
-        const location =<p style={{color:"grey", fontSize:"18px"}}><img src={flag[server.country]} width="40px" height="auto" alt={server.country}/> &nbsp;{server.location }</p>
-        const billing_type =<p style={{color:"grey", fontSize:"18px"}}>{server.billing_type }</p>
+        const location =<span style={{color:"grey", fontSize:"18px"}}><img src={flag[server.country]} width="30px" height="auto" alt={server.country}/> &nbsp;{server.location }</span>
+        const billing_type =<span style={{color:"grey", fontSize:"18px"}}>{server.billing_type }</span>
         
-        const expire_date =<div>
-              <span style={{color:"grey", fontSize:"17px"}}>{server.expire_date ? server.expire_date: " No expire date" }</span>&nbsp;&nbsp;
-              {/* <IconButton variant="contained" color="primary" onClick={()=>expireDateModalHandler(server, server.key)}><EditIcon/></IconButton>&nbsp;&nbsp; */}
-            </div> 
+        const expire_date =
+              <span style={{color:"grey", fontSize:"17px"}}>{server.expire_date ? server.expire_date: " No expire date" }</span>
+           
        
-        const action = <div>
+        const action = <span>
             <IconButton aria-controls="simple-menu" aria-haspopup="true"  onClick={(e)=>{serverRouteHandler(server,server.key);handleClick(e)}}><MoreHorizIcon style={{color:"grey"}}/></IconButton>
             <Menu
                 id="simple-menu"
@@ -376,8 +359,7 @@ const ServerTable = (props)=>{
                     </NavLink> 
                 </MenuItem><br/>
                 <Divider/><br/>
-              {/* <IconButton variant="contained" color="primary" onClick={()=>expireDateModalHandler(server, server.key)}><EditIcon/></IconButton>&nbsp;&nbsp; */}
-
+             
                 <MenuItem onClick={handleClose} style={{color:"grey"}}><span  onClick={()=>setreNewServerM(true)} >< EditIcon /> &nbsp; Renew Server</span></MenuItem>
                 <MenuItem onClick={handleClose} style={{color:"grey"}}><span  onClick={()=>setStopServerM(true)} ><PowerSettingsNewIcon/> &nbsp; Server Stop</span></MenuItem>
                 <MenuItem onClick={handleClose} style={{color:"grey"}}><span onClick={()=>setRestartServerM(true)} ><AutorenewIcon/> &nbsp; Server Restart</span></MenuItem>
@@ -387,15 +369,15 @@ const ServerTable = (props)=>{
 
             </Menu>
      
-        </div>
+        </span>
         
-        const status = <div>
+        const status = <span>
                 
                 
                 {spinner && serverId === server.server_id  ? <CircularProgress  style={{color:"#007bfc"}} /> :
                   <div> <span style={{color:"grey", fontSize:"18px"}}>{server.power_status }</span>&nbsp;&nbsp;
-                       <IconButton onClick={()=>checkServerStatus(server.server_id,server.route, server.key)}><SlowMotionVideoIcon style={{color:"#007bfc"}}  /> </IconButton> </div>}&nbsp;&nbsp;
-            </div>
+                       <IconButton onClick={()=>checkServerStatus(server.server_id,server.route, server.key)}><SlowMotionVideoIcon style={{color:"#007bfc"}}  /> </IconButton> </div>}
+            </span>
             
         return {server_data, location, expire_date , billing_type,status, action};
     }
@@ -441,9 +423,10 @@ const ServerTable = (props)=>{
 
         <div>
           <br/>
-            <Typography variant="h4" 
-            style={{textAlign:"left",color:"#007bfc", fontWeight:"bolder",  width:"100%", background:"linear-gradient(90deg, rgba(224,224,224,100) 0%, rgba(255,255,255,0) 70%)", padding:"20px", borderRadius:"10px"}}>Server table </Typography><br/>
-                
+           
+            {/* <Typography variant="h4" 
+            style={{textAlign:"left",color:"#007bfc", fontWeight:"bolder",  width:"100%", background:"linear-gradient(90deg, rgba(224,224,224,100) 0%, rgba(255,255,255,0) 70%)", padding:"20px", borderRadius:"10px"}}>Server table </Typography> */}
+            
             <Grid container spacing={2} >
                <Grid item sx= {3} sm={2} md={1} lg={1} style={{borderBottom: showtext[0] && "2px solid #007bff", width: showtext[0] && "100%" }}>
                   <p className="Profile_Tab"  onClick={()=>{changeRead(0);getServers("vultr")}} >Vultr</p>
@@ -468,10 +451,7 @@ const ServerTable = (props)=>{
                     </div>}
             <br/>
             <div style={{display:"flex", flexFlow:"row-reverse"}}>
-            {/* <ServerRouteFilter
-               routeProvider ={routeProvider}
-               getServers={getServers}
-               /> &nbsp; &nbsp; &nbsp; */}
+           
             <VpnFilter
                 setVpnType={setVpnType}
                 vpn_type={vpn_type}
@@ -480,9 +460,9 @@ const ServerTable = (props)=>{
             <br/>
 
         <Paper className={classes.root}>
-             <TableContainer className={classes.container}>
+             <TableContainer className={classes.container} >
         
-                <Table stickyHeader aria-label="sticky table" >
+                <Table stickyHeader >
                 <TableHead >
                     <TableRow >
                     {columns.map((column) => (
@@ -499,12 +479,12 @@ const ServerTable = (props)=>{
                 <TableBody>
                     {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                     return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        <TableRow   tabIndex={-1} key={index} >
                         {columns.map((column, index) => {
                             const value = row[column.id];
                         
                             return (
-                            <TableCell key={index} align={column.align}>
+                            <TableCell padding="none" key={index}  style={{ paddingLeft:"20px"}}  align={column.align}>
                                 {column.format && typeof value === 'number' ? column.format(value) : value}
                             </TableCell>
                             );
@@ -527,20 +507,9 @@ const ServerTable = (props)=>{
     </Paper>
       
 
-                {deleteModal &&    <DeleteModal 
-                                server={serverData} 
-                                modalHandler={deleteModalHandler}
-                                serverIndex={serverIndex}
-                                modal={deleteModal}/>}  
 
-                {expireDateModal && <ExpiredateUpdateModal 
-                                    server={serverData} 
-                                    serverIndex={serverIndex}
-                                    modalHandler={expireDateModalHandler}
-                                    modal={expireDateModal}/>}  
-                {deatilsModal && <ServerDetailsModal server={serverData} modalHandler={detailsModalHandler} modal={deatilsModal}/>}  
-
-
+              
+          
 
 
         {stopServerM &&

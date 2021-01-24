@@ -1,14 +1,15 @@
-import React , {useState, useEffect} from 'react'
+import React  , {useState, useEffect} from 'react'
+
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Container, Grid, Paper, Button, Typography} from '@material-ui/core'
-import VultServer from '../../../../components/servers/Vpn_vultr_server'
+import VultServer from '../../../../components/servers/vultr/cloud_server_create/Cloud_server_create'
 import vultLogo from '../../../assets/vultrlogo.png'
+const CloudServer = (props)=>{
 
-const CreateCloudserver = (props)=>{
     const [route, setRoute] = useState("")
     const [packages, setPackages ] = useState([])
-    const [snapshots, setSnapshots ] = useState([])
+    const [vultr_os, setVultrOs ] = useState([])
     const [locations, setLocations ] = useState([])
 
     useEffect(()=>{
@@ -18,10 +19,11 @@ const CreateCloudserver = (props)=>{
                     'Content-Type':"application/json",
                     "Authorization":"Bearer "+props.token
                 }
-                const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_vultr", {headers:headers})
-                setLocations(result.data.locations)
+                const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_cloud", {headers:headers})
+                 console.log(result.data)
+                setLocations(result.data.vultr_locations)
                 setPackages(result.data.packages)
-                setSnapshots(result.data.snapshots)
+                setVultrOs(result.data.vultr_os)
             } catch (error) {
                 console.log(error)
             }
@@ -30,10 +32,10 @@ const CreateCloudserver = (props)=>{
         return () => {
             setLocations([])
             setPackages([])
-            setSnapshots([]) // This worked for me
+            setVultrOs([]) 
           };
     },[])
-    
+
     const routeHandler = (route)=>{
         setRoute(route)
     }
@@ -44,7 +46,7 @@ const CreateCloudserver = (props)=>{
     return(
         <Container>
            {!route &&  <div>
-                <p className="Title_text"> Select Server Provider & Continue creating server</p>
+                <p className="Title_text"> Select Server Provider & Continue creating Cloud server</p>
                 <Grid container spacing ={3}>
                     <Grid item xs={12} sm={6} md={4} lg={4} >
                         <Paper variant="outlined">
@@ -62,7 +64,7 @@ const CreateCloudserver = (props)=>{
              <VultServer
              packages={packages}
              locations={locations}
-             snapshots={snapshots}
+             os={vultr_os}
              route ={route}
              returnHandler={returnHandler}
               />}
@@ -75,4 +77,4 @@ const mapStateToProps = state=>{
         token:state.auth.token
     }
 }
-export default connect(mapStateToProps)(CreateCloudserver)
+export default connect(mapStateToProps)(CloudServer)

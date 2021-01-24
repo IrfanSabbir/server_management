@@ -2,7 +2,7 @@ import React , {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Container, Grid, Paper, Button, Typography} from '@material-ui/core'
-import VultServer from '../../../../components/servers/Vpn_vultr_server'
+import VultServer from '../../../../components/servers/vultr/vpn_server_create/Vpn_vultr_server'
 import vultLogo from '../../../assets/vultrlogo.png'
 
 const Createserver = (props)=>{
@@ -17,7 +17,7 @@ const Createserver = (props)=>{
                     'Content-Type':"application/json",
                     "Authorization":"Bearer "+props.token
                 }
-                const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_vultr", {headers:headers})
+                const result = await axios.get(process.env.REACT_APP_BASE_URL+"customer_api/server/server_data_vpn", {headers:headers})
              
                 setLocations(result.data.vultr_locations)
                 setPackages(result.data.packages)

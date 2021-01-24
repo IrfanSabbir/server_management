@@ -10,11 +10,13 @@ import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 import './Server_Comp.css'
+
 import Location_Component from './Select_Location'
 import SnapShot_Component from './Snapshot'
 import Pakcage_Component from './Server_Packages'
 import Serverinputs_Component from './Server_Inputs'
-import ServerCreatedModal from './Server_createdModal'
+import ServerCreatedModal from '../../common_helper/Server_created_modal'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,11 +58,6 @@ const Vultr_Server = (props)=>{
 
     const [totalFields, setTotalFields] = useState(1)
     const [cost, setCost]= useState({price:0 , name:""})
-
-    
-
-    // const [hostname, setHostname] = useState(label)
-
     const [modal, setModal] = useState(false)
     const [spinner, setSprinner] = useState(false)
     const [message, setMessage]= useState("")
@@ -74,15 +71,12 @@ const Vultr_Server = (props)=>{
       })
     },[])
 
-    // console.log(package_slecet)
     const  labelHandleChange=(i, event) =>{
         const values = [...fields];
         values[i].label = event.target.value;
         values[i].hostname = event.target.value;
         setFields(values);
       }
-
-      
 
       const  hostnameHandleChange=(i, event) =>{
         const host = [...fields]
@@ -160,8 +154,6 @@ const Vultr_Server = (props)=>{
         pricingHandler (billing_type, package_slecet, value)
 
       }
-     
-
 
     const cancleModal = ()=>{
         setModal(false)

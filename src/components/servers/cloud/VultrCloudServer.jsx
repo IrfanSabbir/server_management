@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-import '../Server_Comp.css'
 import Location_Component from '../Select_Location'
 import SnapShot_Component from '../Snapshot'
 import Pakcage_Component from '../Server_Packages'

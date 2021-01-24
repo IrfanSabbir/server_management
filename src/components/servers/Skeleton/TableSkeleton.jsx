@@ -88,9 +88,11 @@ const ServerTableSkeleton = (props)=>{
         {/* <Skeleton variant="rect" width="100%" animation="pulse" height="80px"/><br/>
         <Skeleton variant="rect" width="100%" animation="wave" /><br/> 
         <Skeleton variant="rect" width="100%" animation="wave" /><br/>  */}
-        <Typography variant="h4" 
+        {/* <Typography variant="h4" 
             style={{textAlign:"left",color:"#007bfc", fontWeight:"bolder",  width:"100%", background:"linear-gradient(90deg, rgba(224,224,224,100) 0%, rgba(255,255,255,0) 70%)", padding:"20px", borderRadius:"10px"}}>Server table </Typography><br/>
-                
+                 */}
+            <Skeleton height="20px" width="100px"/><br/>
+            
                 <Grid container spacing={2} >
                <Grid item sx= {3} sm={2} md={1} lg={1}>
                   <p className="Profile_Tab"  >Vultr</p>
